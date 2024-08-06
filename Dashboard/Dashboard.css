@@ -1,0 +1,63 @@
+
+
+.data-div .inner-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px; /* Add space between icon and text */
+    
+}
+
+/* body{
+    background: #2e3134;
+} */
+
+.data-div{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+i {
+    font-size: 2rem;
+    color: white;
+}
+
+h1 {
+    font-size: 1.5rem; /* Adjust as needed */
+    margin: 0; /* Remove default margin */
+    color: white;
+    font-family: inter;
+    font-weight: 600;
+}
+ .top-div{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
+    padding: 20px;
+    max-width: 1140px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 40px;
+ }
+
+ @media screen and (max-width:740px){
+    .top-div{
+        max-width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    }
+}
+
+ p{
+    text-align: start;
+    margin-left: 5px;
+    color: white;
+    font-family: inter;
+    font-weight: 100;
+ }

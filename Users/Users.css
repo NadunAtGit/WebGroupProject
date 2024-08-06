@@ -1,0 +1,22 @@
+.box-1 button{
+    float: right;
+
+}
+
+table{
+   padding-top: 550px;
+}
+
+
+
+@media screen and (max-width: 740px) {
+    table td {
+        font-size: 10px;
+    }
+}
+
+
+
+
+
+

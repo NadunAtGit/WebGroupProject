@@ -1,0 +1,77 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Set mask z-index higher */
+}
+
+.bg-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* Background image should be at the bottom */
+}
+
+.mask::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+    z-index: 1; /* Ensure the overlay is behind the content */
+}
+
+.header{
+    padding: 20px 20px;
+    z-index: 2; /* Bring header in front */
+}
+.bx{
+    color: white;
+    z-index: 2; /* Bring icon in front */
+}
+.content {
+    position: relative;
+    z-index: 2; /* Bring content in front of mask */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+input{
+    z-index: 3; /* Ensure form inputs are clickable */
+    border: 2px solid black;
+}
+#company_name {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 2rem;
+    z-index: 2;
+}
+
+.form-class {
+    
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    border: 2px solid white;
+}

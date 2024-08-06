@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+body{
+    overflow-x: hidden;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 90px;
+    background-color: #12171e;
+    padding: 0.4rem 0.8rem;
+    transition: all 0.5s ease-in;
+    overflow: hidden;
+}
+
+.sidebar.active {
+    width: 250px;
+}
+
+.main-content {
+    transition: all 0.5s ease-in;
+    margin-left: 90px; /* Default margin when sidebar is collapsed */
+}
+
+.sidebar.active ~ .main-content {
+    margin-left: 250px; /* Margin when sidebar is expanded */
+}
+
+.user-img {
+    width: 70px;
+    border-radius: 100%;
+    border: 3px solid #eee;
+}
+
+.sidebar #btn {
+    position: absolute;
+    color: white;
+    top: 0.4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.sidebar.active #btn {
+    left: 90%;
+}
+
+.sidebar .top .logo {
+    color: white;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0%;
+}
+
+.sidebar.active .top .logo {
+    opacity: 100%;
+}
+
+.top .logo i {
+    font-size: 2rem;
+    margin-right: 5px;
+}
+
+.user p {
+    color: white;
+    margin-left: 1rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.sidebar p {
+    opacity: 1;
+}
+
+.sidebar .active p {
+    opacity: 0;
+}
+
+.sidebar ul li {
+    position: relative;
+    list-style-type: none;
+    height: 50px;
+    width: 90%;
+    margin: 0.8rem auto;
+    line-height: 50px;
+}
+
+.sidebar ul li a {
+    color: white;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.8rem;
+    display: flex;
+}
+
+.sidebar ul li a:hover {
+    background-color: white;
+    color: #12171e;
+}
+
+.sidebar ul li a i {
+    min-width: 50px;
+    text-align: center;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    
+}
+
+.sidebar .nav-item {
+    opacity: 0;
+}
+
+.sidebar.active .nav-item {
+    opacity: 1;
+}
+
+/* Hide tooltips by default */
+.sidebar ul li .too-tip {
+    position: absolute;
+    left: 125px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: black;
+    box-shadow: 0 0.5rem 0.8rem rgba(0,0,0,0.2);
+    border-radius: 0.6rem;
+    padding: 0.4rem 1.2rem;
+    line-height: 1.8rem;
+    z-index: 20;
+}
+
+/* Show tooltips only when hovering li and sidebar is not active */
+.sidebar:not(.active) ul li:hover .too-tip {
+    opacity: 1;
+}
+
+@media screen and (max-width: 740px) {
+    .sidebar{
+        height: 120vh;
+    }
+}
+
