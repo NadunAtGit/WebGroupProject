@@ -103,7 +103,7 @@
 
                 <div class="user">
                     
-                    <img src="assets/imgs/customer01.jpg" alt="">
+                    <img src="profile1.jpg" alt="">
                     
                 </div>
             </div>
