@@ -1,63 +1,430 @@
 
+/* =========== Google Fonts ============ */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* =============== Globals ============== */
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.data-div .inner-div {
+
+/*Color Profile Classes */
+.light-red{
+  background:rgb(246, 215, 215);
+}
+
+.light-purple{
+  background:rgb(235, 226, 254);
+}
+
+.light-green{
+  background:rgb(235, 254, 235);
+}
+
+.light-blue{
+  background:rgb(169, 232, 240);
+}
+
+.dark-red{
+  background:red;
+}
+
+.dark-purple{
+  background: purple;
+}
+.dark-green{
+background: green;
+}
+
+:root {
+  --blue: #2a2185;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* =============== Navigation ================ */
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  background: black;
+  border-left: 10px solid rgb(0, 0, 0);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active {
+  width: 80px;
+}
+
+.admintitle{
+  color: blue;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--blue);
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;
+}
+.navigation ul li a i {
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.main {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+  transition: 0.5s;
+}
+.main.active {
+  width: calc(100% - 80px);
+  left: 80px;
+}
+
+.topbar {
+  background: #999;
+  width: 99%;
+  height: 60px;
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  margin-top: 10px;
+  margin-left: 5px;
+  
+}
+
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.search {
+  background: rgb(211, 205, 205);
+    border-radius: 15px;
+    color: rgba(113,99,186,255);
     display: flex;
-    flex-direction: row;
-    align-items: center; /* Align items vertically in the center */
-    gap: 10px; /* Add space between icon and text */
-    
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px;
+    margin-right: 5px;
+  
 }
 
-/* body{
-    background: #2e3134;
-} */
+.search input{
+  background: transparent;
+  padding:10px;
+  border: none;
 
-.data-div{
-    border: 3px solid white;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: black;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-i {
-    font-size: 2rem;
-    color: white;
+.search i{
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+
 }
 
-h1 {
-    font-size: 1.5rem; /* Adjust as needed */
-    margin: 0; /* Remove default margin */
-    color: white;
-    font-family: inter;
-    font-weight: 600;
+.search i:hover{
+  transform:scale(1.2);
 }
- .top-div{
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between; */
-    padding: 20px;
-    max-width: 1140px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 40px;
- }
 
- @media screen and (max-width:740px){
-    .top-div{
-        max-width: 90%;
-    margin: auto;
-    display: grid;
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ======================= Cards ====================== */
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+}
+
+
+
+.main--title{
+  color: rgba(113, 99, 186, 255);
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.cardBox .product--card{
+  
+  border-radius: 10px;
+  padding: 1.2rem;
+  width: 281px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.5s ease-in-out;
+}
+
+.cardBox .product--card:hover{
+  transform: translateY(-5px);
+
+}
+
+.cardBox .card--header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardBox .amount{
+  display: flex;
+  flex-direction: column;
+}
+.cardBox .title1{
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.cardBox .value{
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+
+.cardBox   .icon1{
+  color:white ;
+  padding: 1rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: red;
+}
+
+.cardBox   .icon2{
+  color:white ;
+  padding: 1rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: rgb(200, 0, 255);
+}
+
+.cardBox   .icon3{
+  color:white ;
+  padding: 1rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: rgb(0, 255, 110);
+}
+
+.cardBox   .icon4{
+  color:white ;
+  padding: 1rem;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  background: rgb(0, 255, 255);
+}
+
+.cardBox .product--card:hover {
+  background: black;
+}
+.cardBox .product--card:hover .amount,
+.cardBox .product--card:hover .title1,
+.cardBox .product--card:hover .icon1 {
+  color: var(--white);
+}
+
+
+
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
     grid-template-columns: 1fr;
-    
-    }
+  }
+  .recentOrders {
+    overflow-x: auto;
+  }
+  .status.inProgress {
+    white-space: nowrap;
+  }
 }
 
- p{
-    text-align: start;
-    margin-left: 5px;
-    color: white;
-    font-family: inter;
-    font-weight: 100;
- }
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .user {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
+
+
+
