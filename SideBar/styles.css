@@ -35,6 +35,7 @@ body{
 
 .sidebar.active ~ .main-content {
     margin-left: 250px; /* Margin when sidebar is expanded */
+    overflow-x: auto;
 }
 
 .user-img {
@@ -164,3 +165,7 @@ body{
     }
 }
 
+
+/* .sidebar.active #main-content-iframe{
+    overflow-x: scroll;
+} */

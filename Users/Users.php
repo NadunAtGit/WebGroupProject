@@ -17,6 +17,8 @@ include("../Database/db.php");
             <h1>ALL USERS</h1>
         </div>
 
+        
+
         <table class="table table-hover table-bordered table-striped" id="xx">
             <thead>
                 <tr>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Side Navigation Bar with Curved Borders</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="side_bar">
+        <div class="side_bar_top">
+            <div class="profile_pic">
+                <img src="profile.jpg" alt="profile">
+            </div>
+            <div class="profile_info">
+                <h3>Nimal Jayasundara</h3>
+                <p></p>
+            </div>
+        </div>
+        <div class="side_bar_bottom">
+            <ul>
+                <li class="active">
+                    <span class="top_curve"></span>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-home'></i></span>
+                        <span class="item">DASHBOARD</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li>
+                    <span class="top_curve"></span>
+                    <a href="#">
+                        <span class="icon"><i class='bx bxs-shopping-bag'></i></span>
+                        <span class="item">Make an Order</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li>
+                    <span class="top_curve"></span>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-laptop'></i></span>
+                        <span class="item">Products</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li>
+                    <span class="top_curve"></span>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-user-plus'></i></span>
+                        <span class="item">Add New User</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li>
+                    <span class="top_curve"></span>
+                    <a href="#">
+                        <span class="icon"><i class='bx bx-cog'></i></span>
+                        <span class="item">SETTINGS</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main_container">
+        <!-- <div class="header--wrapper">
+            <div class="header--title">
+                <span>Primary</span>
+                <h2>Dashboard</h2>
+
+            </div>
+            <div class="info">
+                <div class="serach--box">
+                    <i class='bx bx-search-alt-2'></i>
+                    <input type="text" placeholder="search" />
+                 </div>
+                 <img src="logo.jpg" alt="">
+            </div>    
+        </div> -->
+        <div class="card--container">
+            <h3 class="main--title">Today's Data</h3>
+            <div class="card--wrapper">
+               <div class="product--card light-red" >
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                            Total Products
+                        </span>
+                        <span class="value">
+                            10000
+                        </span>
+                    </div>
+                    <div class="icon1">
+                        <i class='bx bxl-product-hunt' ></i>
+                    </div>
+                    
+                </div>
+
+               </div>
+            </div>
+        </div>
+         
+    </div>
+</div>
+
+<script src="scripts.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</body>
+</html>

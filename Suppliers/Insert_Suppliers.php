@@ -55,7 +55,7 @@ if (isset($_POST["add_suppliers"])) {
     $stmt->bind_param("ssss", $_POST["supplier_name"], $_POST["telephone"], $_POST["email"], $selectedItemsString);
     
     if ($stmt->execute()) {
-        header("../SideBar/SideBar.php");
+        header("Location:../Suppliers/Suppliers.php");
         exit;
     } else {
         die("Execution error: " . $stmt->error);

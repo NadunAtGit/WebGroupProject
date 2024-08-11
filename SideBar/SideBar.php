@@ -1,3 +1,7 @@
+<?php
+session_start(); // Ensure the session is started
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,16 +14,16 @@
     <style>
         #main-content-iframe {
             width: 100%;
-            height: 100vh; /* Adjust as needed */
+            height: 100vh;
             border: none;
             overflow: hidden;
         }
 
         .main-content {
-            overflow: hidden;
+            /* overflow: hidden;
             width: 100%;
-            height: 100vh; /* Adjust as needed */
-            box-sizing: border-box;
+            height: 100vh;
+            box-sizing: border-box; */
             padding-top: 30px;
             
         }
@@ -29,16 +33,16 @@
     <div class="sidebar">
         <div class="top">
             <div class="logo">
-                <i class="bx bxl-codepen"></i>
-                <span>Tech-Tool</span>
+                <i class="bx bx-laptop bx-lg"></i>
+                <span style="font-size: 1.6rem;">Tech-Tool</span>
             </div>
             <div class="bx bx-menu" id="btn"></div>
         </div>
         <div class="user">
             <img src="user-img.jpg" alt="user" class="user-img">
             <div>
-                <p class="bold">Priyanka Mohan</p>
-                <p>Admin</p>
+                <p class="bold"><?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
+                <p><?php echo htmlspecialchars($_SESSION['user_role']); ?></p>
             </div>
         </div>
         <ul>
@@ -62,17 +66,25 @@
                 </a>
             </li>
             <li>
+                <a href="#" onclick="showContent('purchases'); return false;" >
+                    <i class="bx bx-cart"></i>
+                    <span class="nav-item">Purchases</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" onclick="showContent('reports'); return false;" >
                     <i class="bx bx-spreadsheet"></i>
                     <span class="nav-item">Reports</span>
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="showContent('customers'); return false;" >
-                    <i class="bx bx-user"></i>
-                    <span class="nav-item">Users</span>
-                </a>
-            </li>
+            <?php if ($_SESSION['user_role'] !== 'user') { ?>
+                <li>
+                    <a href="#" onclick="showContent('customers'); return false;" >
+                        <i class="bx bx-user"></i>
+                        <span class="nav-item">Users</span>
+                    </a>
+                </li>
+            <?php } ?>
             <li>
                 <a href="#" onclick="showContent('suppliers'); return false;" >
                     <i class="bx bx-store"></i>
@@ -118,6 +130,9 @@
             iframe.src = '../Users/Users.php'; // Update with the actual path
         } else if (section === 'suppliers') {
             iframe.src = '../Suppliers/Suppliers.php'; // Update with the actual path
+        }
+        else if (section === 'purchases') {
+            iframe.src = '../Purchases/Purchases.php'; // Update with the actual path
         } else {
             iframe.src = ''; // Clear the iframe if needed
         }
