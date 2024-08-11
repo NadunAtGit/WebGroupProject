@@ -43,6 +43,7 @@ if (isset($_POST["login"])) {
             $_SESSION["user_id"] = $row["User_ID"];
             $_SESSION["user_name"] = $row["user_name"];
             $_SESSION["user_role"] = $row["role"];
+            $_SESSION['user_image'] = $row["image_path"];
             
             header("Location: ../SideBar/SideBar.php");
             exit;

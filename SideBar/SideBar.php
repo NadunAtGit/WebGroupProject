@@ -39,7 +39,8 @@ session_start(); // Ensure the session is started
             <div class="bx bx-menu" id="btn"></div>
         </div>
         <div class="user">
-            <img src="user-img.jpg" alt="user" class="user-img">
+        <img src="<?php echo htmlspecialchars($_SESSION['user_image']); ?>" alt="user" class="user-img" >
+
             <div>
                 <p class="bold"><?php echo htmlspecialchars($_SESSION['user_name']); ?></p>
                 <p><?php echo htmlspecialchars($_SESSION['user_role']); ?></p>

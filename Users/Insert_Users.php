@@ -1,9 +1,6 @@
 <?php 
 require "../Database/db.php";
 
-// Connect to the database
-$conn = $connection;
-
 if(isset($_POST["add_users"])){
     // Validate the input fields
     if(empty($_POST["user_name"])){
@@ -42,7 +39,7 @@ if(isset($_POST["add_users"])){
 
     // Generate the customized User_ID
     $sql = "SELECT User_ID FROM users ORDER BY User_ID DESC LIMIT 1";
-    $result = $conn->query($sql);
+    $result = $connection->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -54,15 +51,45 @@ if(isset($_POST["add_users"])){
         $new_id = 'U-001';
     }
 
-    // Prepare and execute the SQL statement
-    $sql = "INSERT INTO users (User_ID, user_name, first_name, email, password_hash, role) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->stmt_init();
-    
-    if(!$stmt->prepare($sql)){
-        die("SQL error: " . $conn->error);
+    // Handle the image upload
+    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+        $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+        $fileName = $_FILES['profile_image']['name'];
+        $fileSize = $_FILES['profile_image']['size'];
+        $fileType = $_FILES['profile_image']['type'];
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        // Check if the file is an image
+        $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+        if (in_array($fileExtension, $allowedExtensions)) {
+            // Rename the file to the username
+            $newFileName = $_POST['user_name'] . '.' . $fileExtension;
+            $uploadFileDir = '../User_Images/';
+            $dest_path = $uploadFileDir . $newFileName;
+
+            if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                $image_path = $dest_path;
+            } else {
+                die("Error moving the file");
+            }
+        } else {
+            die("Only image files are allowed");
+        }
+    } else {
+        // If no file uploaded, set default or handle accordingly
+        $image_path = null;
     }
 
-    $stmt->bind_param("ssssss", $new_id, $_POST["user_name"], $_POST["first_name"], $_POST["email"], $password_hash, $role);
+    // Prepare and execute the SQL statement
+    $sql = "INSERT INTO users (User_ID, user_name, first_name, email, password_hash, role, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $connection->stmt_init();
+    
+    if(!$stmt->prepare($sql)){
+        die("SQL error: " . $connection->error);
+    }
+
+    $stmt->bind_param("sssssss", $new_id, $_POST["user_name"], $_POST["first_name"], $_POST["email"], $password_hash, $role, $image_path);
     
     if($stmt->execute()){
         // Redirect to the users list page or another appropriate page
