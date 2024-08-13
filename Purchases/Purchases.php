@@ -25,6 +25,7 @@
                     <th>Product ID</th>
                     <th>Quantity</th>
                     <th>Price per Unit</th>
+                    <th>Selling Price</th> <!-- Added Selling Price column -->
                     <th>Supplier ID</th>
                     <th>Date</th>
                 </tr>
@@ -43,6 +44,7 @@
                             <td><?php echo htmlspecialchars($row["Product_ID"]); ?></td>
                             <td><?php echo htmlspecialchars($row["quantity"]); ?></td>
                             <td><?php echo htmlspecialchars($row["price_per_unit"]); ?></td>
+                            <td><?php echo htmlspecialchars($row["selling_price"]); ?></td> <!-- Added Selling Price display -->
                             <td><?php echo htmlspecialchars($row["Supplier_ID"]); ?></td>
                             <td><?php echo htmlspecialchars($row["Date"]); ?></td>
                         </tr>
@@ -55,93 +57,96 @@
     </div>
 
     <!-- Duplicate Entry Warning Modal -->
-<?php if (isset($_GET['error']) && $_GET['error'] == 'duplicate_entry'): ?>
-<div class="modal fade" id="duplicateEntryModal" tabindex="-1" aria-labelledby="duplicateEntryModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="duplicateEntryModalLabel">Warning</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>A purchase with the same Stock ID and Product ID already exists.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    var duplicateEntryModal = new bootstrap.Modal(document.getElementById('duplicateEntryModal'));
-    duplicateEntryModal.show();
-</script>
-<?php endif; ?>
-
-
-                <!-- Add Purchase Modal -->
-<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="purchaseModalLabel">Add Purchase</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="insert_purchase.php">
-                    <div class="mb-3">
-                        <label for="stock_id" class="form-label">Stock ID</label>
-                        <input type="text" class="form-control" id="stock_id" name="stock_id" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="product_id" class="form-label">Product ID</label>
-                        <select class="form-select" id="product_id" name="product_id" required>
-                            <option value="" selected disabled>Select Product ID</option>
-                            <?php
-                            $product_query = "SELECT Product_ID, product_name FROM products";
-                            $product_result = mysqli_query($connection, $product_query);
-                            while ($product_row = mysqli_fetch_assoc($product_result)) {
-                                echo "<option value='" . htmlspecialchars($product_row['Product_ID']) . "'>" . htmlspecialchars($product_row['Product_ID']) . " - " . htmlspecialchars($product_row['product_name']) . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price_per_unit" class="form-label">Price per Unit</label>
-                        <input type="text" class="form-control" id="price_per_unit" name="price_per_unit" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="supplier_id" class="form-label">Supplier ID</label>
-                        <select class="form-select" id="supplier_id" name="supplier_id" required>
-                            <option value="" selected disabled>Select Supplier ID</option>
-                            <?php
-                            $supplier_query = "SELECT Supplier_ID, supplier_name FROM suppliers";
-                            $supplier_result = mysqli_query($connection, $supplier_query);
-                            while ($supplier_row = mysqli_fetch_assoc($supplier_result)) {
-                                echo "<option value='" . htmlspecialchars($supplier_row['Supplier_ID']) . "'>" . htmlspecialchars($supplier_row['Supplier_ID']) . " - " . htmlspecialchars($supplier_row['supplier_name']) . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" name="add_purchase">Add</button>
-                    </div>
-                </form>
+    <?php if (isset($_GET['error']) && $_GET['error'] == 'duplicate_entry'): ?>
+    <div class="modal fade" id="duplicateEntryModal" tabindex="-1" aria-labelledby="duplicateEntryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="duplicateEntryModalLabel">Warning</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>A purchase with the same Stock ID and Product ID already exists.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <script>
+        var duplicateEntryModal = new bootstrap.Modal(document.getElementById('duplicateEntryModal'));
+        duplicateEntryModal.show();
+    </script>
+    <?php endif; ?>
+
+
+    <!-- Add Purchase Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="purchaseModalLabel">Add Purchase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="insert_purchase.php">
+                        <div class="mb-3">
+                            <label for="stock_id" class="form-label">Stock ID</label>
+                            <input type="text" class="form-control" id="stock_id" name="stock_id" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="product_id" class="form-label">Product ID</label>
+                            <select class="form-select" id="product_id" name="product_id" required>
+                                <option value="" selected disabled>Select Product ID</option>
+                                <?php
+                                $product_query = "SELECT Product_ID, product_name FROM products";
+                                $product_result = mysqli_query($connection, $product_query);
+                                while ($product_row = mysqli_fetch_assoc($product_result)) {
+                                    echo "<option value='" . htmlspecialchars($product_row['Product_ID']) . "'>" . htmlspecialchars($product_row['Product_ID']) . " - " . htmlspecialchars($product_row['product_name']) . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price_per_unit" class="form-label">Price per Unit</label>
+                            <input type="text" class="form-control" id="price_per_unit" name="price_per_unit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="selling_price" class="form-label">Selling Price</label>
+                            <input type="text" class="form-control" id="selling_price" name="selling_price" required> <!-- Added Selling Price field -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="supplier_id" class="form-label">Supplier ID</label>
+                            <select class="form-select" id="supplier_id" name="supplier_id" required>
+                                <option value="" selected disabled>Select Supplier ID</option>
+                                <?php
+                                $supplier_query = "SELECT Supplier_ID, supplier_name FROM suppliers";
+                                $supplier_result = mysqli_query($connection, $supplier_query);
+                                while ($supplier_row = mysqli_fetch_assoc($supplier_result)) {
+                                    echo "<option value='" . htmlspecialchars($supplier_row['Supplier_ID']) . "'>" . htmlspecialchars($supplier_row['Supplier_ID']) . " - " . htmlspecialchars($supplier_row['supplier_name']) . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" name="add_purchase">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Product ID Warning Modal -->
     <?php if (isset($_GET['error']) && $_GET['error'] == 'invalid_product_id'): ?>

@@ -58,3 +58,9 @@ CREATE TABLE orders (
     discounts DECIMAL(10, 2),
     FOREIGN KEY (product_id) REFERENCES products(Product_ID)
 );
+
+ALTER TABLE users
+ADD image_path VARCHAR(255) DEFAULT NULL;
+
+ALTER TABLE purchases
+ADD selling_price DECIMAL(10, 2) NOT NULL;

@@ -1,7 +1,7 @@
-/* .box-1 button{
+.box-1 button{
     float: right;
 
-} */
+}
 
 table{
    padding-top: 550px;
@@ -23,6 +23,10 @@ table{
 @media screen and (max-width: 740px) {
     table td {
         font-size: 10px;
+    }
+
+    .button1{
+        font-size: 2px;
     }
 
     
