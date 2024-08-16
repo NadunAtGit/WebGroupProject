@@ -124,7 +124,7 @@ session_start(); // Ensure the session is started
         } else if (section === 'products') {
             iframe.src = '../Products/Products.php'; // Update with the actual path
         } else if (section === 'inventory') {
-            iframe.src = 'inventory.html'; // Update with the actual path
+            iframe.src = '../Inventory/inventory.php'; // Update with the actual path
         } else if (section === 'reports') {
             iframe.src = 'reports.html'; // Update with the actual path
         } else if (section === 'customers') {
