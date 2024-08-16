@@ -2,7 +2,7 @@
 include("../Database/db.php"); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_purchase'])) {
-    $stock_id = $_POST['stock_id'];
+    $stock_id = $_POST['stock_id']; 
     $product_id = $_POST['product_id'];
     $quantity = $_POST['quantity'];
     $price_per_unit = $_POST['price_per_unit'];

@@ -3,7 +3,7 @@ CREATE DATABASE inventory1;
 USE inventory1;
 
 CREATE TABLE users (
-    User_ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID VARCHAR(50) PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE suppliers (
-    Supplier_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Supplier_ID VARCHAR(50) PRIMARY KEY,
     supplier_name VARCHAR(255) NOT NULL,
     telephone VARCHAR(20),
     email VARCHAR(255),
@@ -20,28 +20,27 @@ CREATE TABLE suppliers (
 );
 
 CREATE TABLE products (
-    Product_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Product_ID VARCHAR(50) PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
     category VARCHAR(100)
 );
 
 CREATE TABLE purchases (
-    Stock_ID INT,
-    Product_ID INT,
+    Stock_ID VARCHAR(50),
+    Product_ID VARCHAR(50),
     quantity INT NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,
-    Supplier_ID INT,
+    Supplier_ID VARCHAR(50),
     Date DATE NOT NULL,
     PRIMARY KEY (Stock_ID, Product_ID),
     FOREIGN KEY (Product_ID) REFERENCES products(Product_ID),
     FOREIGN KEY (Supplier_ID) REFERENCES suppliers(Supplier_ID)
 );
 
-
 CREATE TABLE inventory (
-    stock_id INT,
-    product_id INT,
+    stock_id VARCHAR(50),
+    product_id VARCHAR(50),
     quantity INT NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (stock_id, product_id),
@@ -50,8 +49,8 @@ CREATE TABLE inventory (
 );
 
 CREATE TABLE orders (
-    Order_ID INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
+    Order_ID VARCHAR(50) PRIMARY KEY,
+    product_id VARCHAR(50) NOT NULL,
     quantity INT NOT NULL,
     Total DECIMAL(10, 2) NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,

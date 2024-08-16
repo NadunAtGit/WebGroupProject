@@ -1,8 +1,6 @@
 <?php 
 
 
-
-
 require "../Database/db.php";
 
 // Connect to the database

@@ -92,10 +92,19 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="insert_purchase.php">
-                        <div class="mb-3">
-                            <label for="stock_id" class="form-label">Stock ID</label>
-                            <input type="text" class="form-control" id="stock_id" name="stock_id" required>
-                        </div>
+                    <div class="mb-3">
+                    <label for="order_type" class="form-label">Order Type</label>
+                    <select class="form-select" id="order_type" name="order_type" required>
+                        <option value="" selected disabled>Select Order Type</option>
+                        <option value="last_order">Last Order</option>
+                        <option value="new_order">New Order</option>
+                    </select>
+</div>
+<div class="mb-3">
+    <label for="stock_id" class="form-label">Stock ID</label>
+    <input type="text" class="form-control" id="stock_id" name="stock_id" readonly required>
+</div>
+
                         <div class="mb-3">
                             <label for="product_id" class="form-label">Product ID</label>
                             <select class="form-select" id="product_id" name="product_id" required>
@@ -176,5 +185,30 @@
     <!-- Include Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script>
+document.getElementById('order_type').addEventListener('change', function () {
+    var orderType = this.value;
+    var stockIdInput = document.getElementById('stock_id');
+
+    if (orderType === 'last_order') {
+        // Fetch the last Stock_ID from the database via AJAX
+        fetch('get_last_stock_id.php')
+            .then(response => response.text())
+            .then(data => {
+                stockIdInput.value = data; // Set the Stock_ID to the last order
+            });
+    } else if (orderType === 'new_order') {
+        // Fetch the new Stock_ID from the database via AJAX
+        fetch('get_new_stock_id.php')
+            .then(response => response.text())
+            .then(data => {
+                stockIdInput.value = data; // Set the Stock_ID to the new order ID
+            });
+    } else {
+        stockIdInput.value = ''; // Clear the field if no valid option is selected
+    }
+});
+</script>
+
 </body>
 </html>

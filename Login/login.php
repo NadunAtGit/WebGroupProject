@@ -11,11 +11,15 @@ if (isset($_POST["login"])) {
 
     // Validate input fields
     if (empty($username)) {
-        die("Please enter username");
+        $_SESSION['error_message'] = "Please enter username";
+        header("Location: Login.php");
+        exit;
     }
 
     if (empty($password)) {
-        die("Please enter password");
+        $_SESSION['error_message'] = "Please enter password";
+        header("Location: Login.php");
+        exit;
     }
 
     // Prepare the SQL statement to prevent SQL injection
@@ -23,7 +27,9 @@ if (isset($_POST["login"])) {
     $stmt = $conn->stmt_init();
 
     if (!$stmt->prepare($sql)) {
-        die("SQL error: " . $conn->error);
+        $_SESSION['error_message'] = "SQL error: " . $conn->error;
+        header("Location: Login.php");
+        exit;
     }
 
     // Bind the username parameter
@@ -48,10 +54,14 @@ if (isset($_POST["login"])) {
             header("Location: ../SideBar/SideBar.php");
             exit;
         } else {
-            die("Invalid password");
+            $_SESSION['error_message'] = "Invalid password";
+            header("Location: Login.php");
+            exit;
         }
     } else {
-        die("User not found");
+        $_SESSION['error_message'] = "User not found";
+        header("Location: Login.php");
+        exit;
     }
 }
 ?>
@@ -61,10 +71,8 @@ if (isset($_POST["login"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login</title>
@@ -92,5 +100,27 @@ if (isset($_POST["login"])) {
             </div>
         </div>
     </div>
+
+    <!-- Error Modal -->
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="modal show d-block" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Error</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p><?php echo $_SESSION['error_message']; ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="location.href='Login.php'">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
