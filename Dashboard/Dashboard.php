@@ -33,10 +33,34 @@
             </div>
             <div class="data-div">
                 <div class="inner-div">
-                    <i class=".i-div bx bx-dollar-circle"></i>
+                    <i class=".i-div bx bx-user"></i>
                     <h1>$100000</h1>
             </div>
             <p>Today Customers</p>
+            </div>
+        </div>
+
+        <div class="top-div">
+            <div class="data-div">
+                <div class="inner-div">
+                        <i class="i-div bx bx-mobile"></i>
+                        <h1>1084</h1>
+                </div>
+                <p>Mobile Phones</p>
+            </div>
+            <div class="data-div">
+                <div class="inner-div">
+                    <i class=".i-div bx bx-laptop"></i>
+                    <h1>78</h1>
+            </div>
+            <p>Laptops</p>
+            </div>
+            <div class="data-div">
+                <div class="inner-div">
+                    <i class=".i-div bx  bx-wrench"></i>
+                    <h1>85</h1>
+            </div>
+            <p>Parts</p>
             </div>
         </div>
 

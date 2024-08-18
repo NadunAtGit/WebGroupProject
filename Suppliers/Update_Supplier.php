@@ -1,5 +1,5 @@
 <?php
-require "../Database/db.php";
+include("../Database/db.php");
 
 // Connect to the database
 $conn = $connection;
@@ -43,7 +43,7 @@ if (isset($_POST["update_supplier"])) {
         die("SQL error: " . $conn->error);
     }
 
-    $stmt->bind_param("ssssi", $name, $telephone, $email, $items, $supplier_id);
+    $stmt->bind_param("sssss", $name, $telephone, $email, $items, $supplier_id);
 
     if ($stmt->execute()) {
         header("Location: Suppliers.php");

@@ -1,26 +1,23 @@
 <?php
-// Include database connection
-include("../Database/db.php");
+include("../Database/db.php"); // Make sure this includes the correct database connection
 
-// Check if the 'id' parameter is set
+// Check if 'id' parameter is set in the URL
 if (isset($_GET['id'])) {
-    $id = intval($_GET['id']); // Sanitize and convert to integer
-
-    // Prepare and execute the DELETE query
-    $query = "DELETE FROM users WHERE User_ID = ?";
-    if ($stmt = $connection->prepare($query)) {
-        $stmt->bind_param("i", $id);
-        if ($stmt->execute()) {
-            // Redirect to the users list page after successful deletion
-            header("Location: ../Users/Users.php");
-            exit();
-        } else {
-            die("Deletion failed: " . $stmt->error);
-        }
+    $userId = mysqli_real_escape_string($connection, $_GET['id']);
+    
+    // Delete the specific user from the database
+    $query = "DELETE FROM users WHERE User_ID = '$userId'";
+    
+    if (mysqli_query($connection, $query)) {
+        // Redirect to the users page with a success message
+        header("Location: ../Users/users.php?message=User deleted successfully");
+        exit();
     } else {
-        die("SQL prepare failed: " . $connection->error);
+        // Handle error
+        die("Error deleting user: " . mysqli_error($connection));
     }
 } else {
-    die("Invalid request");
+    // Handle the case where 'id' parameter is missing
+    die("User ID not specified.");
 }
 ?>

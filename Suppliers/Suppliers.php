@@ -48,20 +48,21 @@
                                 <td><?php echo htmlspecialchars($row["email"]); ?></td>
                                 <td><?php echo htmlspecialchars($row["items"]); ?></td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-<?php echo $row['Supplier_ID']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Actions
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-<?php echo $row['Supplier_ID']; ?>">
-                                            <li>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateModal-<?php echo $row['Supplier_ID']; ?>">Update</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="../Suppliers/Delete_Supplier.php?id=<?php echo $row['Supplier_ID']; ?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-<?php echo $row['Supplier_ID']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-<?php echo $row['Supplier_ID']; ?>">
+            <li>
+                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#updateModal-<?php echo $row['Supplier_ID']; ?>">Update</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="../Suppliers/Delete_Supplier.php?id=<?php echo $row['Supplier_ID']; ?>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+            </li>
+        </ul>
+    </div>
+</td>
+
                             </tr>
                             <?php
                         }
