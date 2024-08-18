@@ -17,16 +17,19 @@ include("../Database/db.php");
             <h1>ALL USERS</h1>
         </div>
 
-        <div class="box-1 mb-3 d-flex justify-content-between align-items-center">
-    <!-- Search bar floated left -->
-    <form class="d-flex" role="search" id="searchForm" method="GET" action="../Users/Search_User.php">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" name="search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-
-    <!-- "ADD USER" button floated right -->
-    <button type="button" class="btn btn-primary dynamic-btn button1" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD USER</button>
-</div>
+        <div class="row mb-3">
+            <!-- Search bar -->
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                <form class="d-flex" role="search" id="searchForm" method="GET" action="../Users/Search_User.php">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="searchInput" name="search">
+                    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                </form>
+            </div>
+            <!-- Add User button -->
+            <div class="col-12 col-md-6 text-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD USER</button>
+            </div>
+        </div>
 
 
         

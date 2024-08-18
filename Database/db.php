@@ -10,7 +10,7 @@ if (!defined("PASSWORD")) {
     define("PASSWORD", "");
 }
 if (!defined("DATABASE")) {
-    define("DATABASE", "inventory1");
+    define("DATABASE", "inventory2");
 }
 
 try {

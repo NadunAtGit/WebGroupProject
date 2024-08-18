@@ -1,6 +1,6 @@
-CREATE DATABASE inventory1;
+CREATE DATABASE inventory2;
 
-USE inventory1;
+USE inventory2;
 
 CREATE TABLE users (
     User_ID VARCHAR(50) PRIMARY KEY,
@@ -8,7 +8,8 @@ CREATE TABLE users (
     first_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     role VARCHAR(100) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL
+    password_hash VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE suppliers (
@@ -34,8 +35,7 @@ CREATE TABLE purchases (
     Supplier_ID VARCHAR(50),
     Date DATE NOT NULL,
     PRIMARY KEY (Stock_ID, Product_ID),
-    FOREIGN KEY (Product_ID) REFERENCES products(Product_ID),
-    FOREIGN KEY (Supplier_ID) REFERENCES suppliers(Supplier_ID)
+    selling_price DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE inventory (
@@ -43,9 +43,7 @@ CREATE TABLE inventory (
     product_id VARCHAR(50),
     quantity INT NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,
-    PRIMARY KEY (stock_id, product_id),
-    FOREIGN KEY (stock_id) REFERENCES purchases(Stock_ID),
-    FOREIGN KEY (product_id) REFERENCES products(Product_ID)
+    PRIMARY KEY (stock_id, product_id)
 );
 
 CREATE TABLE orders (
@@ -54,12 +52,5 @@ CREATE TABLE orders (
     quantity INT NOT NULL,
     Total DECIMAL(10, 2) NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,
-    discounts DECIMAL(10, 2),
-    FOREIGN KEY (product_id) REFERENCES products(Product_ID)
+    discounts DECIMAL(10, 2)
 );
-
-ALTER TABLE users
-ADD image_path VARCHAR(255) DEFAULT NULL;
-
-ALTER TABLE purchases
-ADD selling_price DECIMAL(10, 2) NOT NULL;
