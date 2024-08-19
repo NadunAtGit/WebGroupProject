@@ -85,7 +85,9 @@ include("../Database/db.php");
                             <option value="" disabled>Select category</option>
                             <option value="Laptop" <?php echo $row["category"] === "Laptop" ? "selected" : ""; ?>>Laptop</option>
                             <option value="Phones" <?php echo $row["category"] === "Phones" ? "selected" : ""; ?>>Phones</option>
-                            <option value="Parts" <?php echo $row["category"] === "Parts" ? "selected" : ""; ?>>Parts</option>
+                            <option value="Ram" <?php echo $row["category"] === "Ram" ? "selected" : ""; ?>>Ram</option>
+                            <option value="VGA" <?php echo $row["category"] === "VGA" ? "selected" : ""; ?>>VGA</option>
+                            <option value="HardDisk" <?php echo $row["category"] === "HardDisk" ? "selected" : ""; ?>>HardDisk</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -130,7 +132,9 @@ include("../Database/db.php");
                             <option value="" disabled selected>Select category</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Phones">Phones</option>
-                            <option value="Parts">Parts</option>
+                            <option value="Parts">Ram</option>
+                            <option value="Parts">VGA</option>
+                            <option value="Parts">HardDisk</option>
                         </select>
                     </div>
                     <div class="modal-footer">

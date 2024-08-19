@@ -126,7 +126,7 @@ session_start(); // Ensure the session is started
         } else if (section === 'inventory') {
             iframe.src = '../Inventory/inventory.php'; // Update with the actual path
         } else if (section === 'reports') {
-            iframe.src = 'reports.html'; // Update with the actual path
+            iframe.src = '../sales/sales.php'; // Update with the actual path
         } else if (section === 'customers') {
             iframe.src = '../Users/Users.php'; // Update with the actual path
         } else if (section === 'suppliers') {
