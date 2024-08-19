@@ -1,6 +1,8 @@
-<?php 
 
+<?php
+session_start(); // Ensure the session is started
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,22 +18,25 @@
 </head>
 <body>
     <div class="dashboard">
+        <div class="topline">
+        <h3><?php echo htmlspecialchars($_SESSION['user_role']); ?> /Dashboard</h3>
+        </div>
         <div class="top-div">
-            <div class="data-div">
+            <div class="data-div1">
                 <div class="inner-div">
                         <i class="i-div bx bx-dollar-circle"></i>
                         <h1>$100000</h1>
                 </div>
                 <p>Today Sales</p>
             </div>
-            <div class="data-div">
+            <div class="data-div2">
                 <div class="inner-div">
                     <i class=".i-div bx bx-dollar-circle"></i>
                     <h1>$100000</h1>
             </div>
             <p>Today Revenue</p>
             </div>
-            <div class="data-div">
+            <div class="data-div3">
                 <div class="inner-div">
                     <i class=".i-div bx bx-user"></i>
                     <h1>$100000</h1>
@@ -41,21 +46,26 @@
         </div>
 
         <div class="top-div">
-            <div class="data-div">
+            <div class="data-div4">
                 <div class="inner-div">
                         <i class="i-div bx bx-mobile"></i>
                         <h1>1084</h1>
+                     
+
                 </div>
                 <p>Mobile Phones</p>
+                
+                
+                
             </div>
-            <div class="data-div">
+            <div class="data-div5">
                 <div class="inner-div">
                     <i class=".i-div bx bx-laptop"></i>
                     <h1>78</h1>
             </div>
             <p>Laptops</p>
             </div>
-            <div class="data-div">
+            <div class="data-div6">
                 <div class="inner-div">
                     <i class=".i-div bx  bx-wrench"></i>
                     <h1>85</h1>
