@@ -75,7 +75,7 @@ session_start(); // Ensure the session is started
             <li>
                 <a href="#" onclick="showContent('reports'); return false;" >
                     <i class="bx bx-spreadsheet"></i>
-                    <span class="nav-item">Reports</span>
+                    <span class="nav-item">Sales</span>
                 </a>
             </li>
             <?php if ($_SESSION['user_role'] !== 'user') { ?>
@@ -126,7 +126,7 @@ session_start(); // Ensure the session is started
         } else if (section === 'inventory') {
             iframe.src = '../Inventory/inventory.php'; // Update with the actual path
         } else if (section === 'reports') {
-            iframe.src = '../sales/sales.php'; // Update with the actual path
+            iframe.src = '../Sales/sales.php'; // Update with the actual path
         } else if (section === 'customers') {
             iframe.src = '../Users/Users.php'; // Update with the actual path
         } else if (section === 'suppliers') {

@@ -6,6 +6,8 @@ include("../Database/db.php");
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
 </head>
@@ -22,6 +24,13 @@ include("../Database/db.php");
                 <option value="Phones">Phones</option>
                 <option value="Parts">Parts</option>
             </select>
+        </div>
+
+        <!-- Button for exporting data to CSV -->
+        <div class="mb-3">
+            <a href="export_to_csv.php" class="btn btn-primary">
+                <i class="bi bi-file-earmark-csv"></i> Export to CSV
+            </a>
         </div>
 
         <table class="table table-hover table-bordered table-striped">
