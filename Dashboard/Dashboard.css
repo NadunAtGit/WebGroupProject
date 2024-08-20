@@ -1,4 +1,20 @@
 
+.dashboard .topline{
+    color: black;
+    background-color: rgb(197, 193, 193);
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.dashboard .topline h3{
+    color: rgb(6, 6, 59);
+    text-align: center;
+    text-decoration: none;
+}
 
 .data-div .inner-div {
     display: flex;
@@ -8,30 +24,138 @@
     
 }
 
-/* body{
-    background: #2e3134;
-} */
 
-.data-div{
+
+.data-div1{
     border: 3px solid white;
     padding: 20px;
     border-radius: 10px;
-    background-color: black;
+    background-color: rgb(230, 122, 122);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease-in-out;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
 }
+
+
+.data-div2{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(202, 149, 250);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease-in-out;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+}
+
+.data-div3{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(250, 196, 152);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease-in-out;
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+}
+
+.top-div .data-div4{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: 250px;
+    transition: all 0.5s ease-in-out;
+    color: rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+}
+
+
+.top-div .data-div5{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: 250px;
+    transition: all 0.5s ease-in-out;
+    color: rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+}
+
+.top-div .data-div6{
+    border: 3px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    height: 250px;
+    transition: all 0.5s ease-in-out;
+    color: rgb(255, 255, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 200;
+    
+}
+
+.imgcon{
+    border: 10px black solid;
+}
+
+
+.data-div1:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    background-color: rgb(244, 31, 12); /* New background color on hover */
+    color: white; /* New text color on hover */
+}
+
+.data-div2:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    background-color: rgb(193, 8, 235); /* New background color on hover */
+    color: white; /* New text color on hover */
+}
+
+.data-div3:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    background-color: rgb(253, 151, 7); /* New background color on hover */
+    color: white; /* New text color on hover */
+}
+
+
+.data-div4:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    color: white; /* New text color on hover */
+}
+
+.data-div5:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    color: white; /* New text color on hover */
+}
+
+.data-div6:hover {
+    transform: scale(1.1) translateY(-5px); /* Zoom up and move up */
+    color: white; /* New text color on hover */
+}
+
+
+
+
+
+
+
 
 i {
     font-size: 2rem;
     color: white;
 }
 
-h1 {
-    font-size: 1.5rem; /* Adjust as needed */
-    margin: 0; /* Remove default margin */
-    color: white;
-    font-family: inter;
-    font-weight: 600;
-}
+
  .top-div{
     /* display: flex;
     flex-direction: row;
@@ -54,10 +178,12 @@ h1 {
     }
 }
 
- p{
+ p{ font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
     text-align: start;
     margin-left: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
     font-family: inter;
     font-weight: 100;
  }
