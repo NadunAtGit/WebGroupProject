@@ -74,7 +74,11 @@ session_start(); // Ensure the session is started
             </li>
             <li>
                 <a href="#" onclick="showContent('reports'); return false;" >
+<<<<<<< HEAD
                     <i class="bx bx-bar-chart-alt-2"></i>
+=======
+                    <i class="bx bx-spreadsheet"></i>
+>>>>>>> c98dbaf093059f52c860e77b1e0dfb73eb3d910f
                     <span class="nav-item">Sales</span>
                 </a>
             </li>
