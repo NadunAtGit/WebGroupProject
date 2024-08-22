@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 include("../Database/db.php"); // Adjust the path to your database connection
 
@@ -29,13 +28,13 @@ if (!$result) {
         }
     }
 }
-=======
+
+// Close the first PHP block here
+?>
 
 <?php
 session_start(); // Ensure the session is started
->>>>>>> c98dbaf093059f52c860e77b1e0dfb73eb3d910f
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +51,7 @@ session_start(); // Ensure the session is started
 <body>
     <div class="dashboard">
         <div class="topline">
-        <h3><?php echo htmlspecialchars($_SESSION['user_role']); ?> /Dashboard</h3>
+            <h3><?php echo htmlspecialchars($_SESSION['user_role']); ?> /Dashboard</h3>
         </div>
         <div class="top-div">
             <div class="data-div1">
@@ -81,20 +80,10 @@ session_start(); // Ensure the session is started
         <div class="top-div">
             <div class="data-div4">
                 <div class="inner-div">
-<<<<<<< HEAD
                     <i class="i-div bx bx-mobile"></i>
                     <h1><?php echo htmlspecialchars($mobilePhones); ?></h1>
-=======
-                        <i class="i-div bx bx-mobile"></i>
-                        <h1>1084</h1>
-                     
-
->>>>>>> c98dbaf093059f52c860e77b1e0dfb73eb3d910f
                 </div>
                 <p>Mobile Phones</p>
-                
-                
-                
             </div>
             <div class="data-div5">
                 <div class="inner-div">
@@ -118,3 +107,4 @@ session_start(); // Ensure the session is started
     </div>
 </body>
 </html>
+
