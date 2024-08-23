@@ -57,7 +57,7 @@ session_start(); // Ensure the session is started
             <div class="data-div1">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
-                    <h1>$100000</h1>
+                    <h1>$5000</h1>
                 </div>
                 <p>Today Sales</p>
             </div>

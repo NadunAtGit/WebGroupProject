@@ -88,7 +88,7 @@ if (isset($_POST["login"])) {
             <div class="form-class p-4 rounded shadow">
                 <form action="Login.php" method="post">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">User_name</label>
                         <input type="text" class="form-control" name="username" id="username" required>
                     </div>
                     <div class="mb-3">

@@ -1,3 +1,5 @@
+
+
 CREATE DATABASE inventory2;
 
 USE inventory2;
@@ -53,4 +55,11 @@ CREATE TABLE orders (
     Total DECIMAL(10, 2) NOT NULL,
     price_per_unit DECIMAL(10, 2) NOT NULL,
     discounts DECIMAL(10, 2)
+);
+
+CREATE TABLE customers (             /*..Add new table customers.*/ 
+    Customer_ID VARCHAR(50) PRIMARY KEY,
+    customer_name VARCHAR(255) NOT NULL,
+    telephone VARCHAR(20),
+    Date DATE NOT NULL
 );

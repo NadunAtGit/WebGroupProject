@@ -25,7 +25,7 @@ include("../Database/db.php");
                     <button class="btn btn-outline-success ms-2" type="submit">Search</button>
                 </form>
             </div>
-            <!-- Add User button -->
+            <!-- Add User button Here have -->
             <div class="col-12 col-md-6 text-end">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">ADD USER</button>
             </div>
