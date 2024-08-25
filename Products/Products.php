@@ -85,9 +85,7 @@ include("../Database/db.php");
                             <option value="" disabled>Select category</option>
                             <option value="Laptop" <?php echo $row["category"] === "Laptop" ? "selected" : ""; ?>>Laptop</option>
                             <option value="Phones" <?php echo $row["category"] === "Phones" ? "selected" : ""; ?>>Phones</option>
-                            <option value="Ram" <?php echo $row["category"] === "Ram" ? "selected" : ""; ?>>Ram</option>
-                            <option value="VGA" <?php echo $row["category"] === "VGA" ? "selected" : ""; ?>>VGA</option>
-                            <option value="HardDisk" <?php echo $row["category"] === "HardDisk" ? "selected" : ""; ?>>HardDisk</option>
+                            <option value="Parts" <?php echo $row["category"] === "Parts" ? "selected" : ""; ?>>Parts</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -124,7 +122,7 @@ include("../Database/db.php");
                     </div>
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required min="1" step="1">
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">Category</label>
@@ -132,9 +130,7 @@ include("../Database/db.php");
                             <option value="" disabled selected>Select category</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Phones">Phones</option>
-                            <option value="Parts">Ram</option>
-                            <option value="Parts">VGA</option>
-                            <option value="Parts">HardDisk</option>
+                            <option value="Parts">Parts</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -146,6 +142,7 @@ include("../Database/db.php");
         </div>
     </div>
 </div>
+
 
 
     <!-- Include Bootstrap JavaScript -->
