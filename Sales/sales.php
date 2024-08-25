@@ -105,7 +105,11 @@
                 <span id="customerMessage" class="text-danger"></span>
             </div>
 
-            <button type="button" class="btn btn-success" onclick="proceedPayment()">Proceed Payment</button>
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-primary" onclick="generatePDF()">Generate PDF</button>
+                <button type="button" class="btn btn-success" onclick="proceedPayment()">Proceed Payment</button>
+            </div>
         </div>
     </div>
 
@@ -188,7 +192,7 @@
             const price = document.getElementById('priceInput').value;
             const discount = document.getElementById('discountInput').value;
             const discountValue = (price * discount) / 100;
-            const totalPrice = price - discountValue;
+            const totalPrice = (price - discountValue) * quantity;
 
             // Validate inputs
             if (productID && serialNumber && quantity && price && discount) {
@@ -214,66 +218,61 @@
 
         function updateNetTotal() {
             const tableRows = document.getElementById('orderTable').rows;
-            let grandTotal = 0;
+            let netTotal = 0;
 
             for (let i = 0; i < tableRows.length; i++) {
-                const row = tableRows[i];
-                grandTotal += parseFloat(row.cells[5].textContent);
+                netTotal += parseFloat(tableRows[i].cells[5].textContent);
             }
 
-            document.getElementById('netTotal').value = grandTotal.toFixed(2);
+            document.getElementById('netTotal').value = netTotal.toFixed(2);
         }
 
-        function proceedPayment() {
-            const customerName = document.getElementById('customerNameInput').value;
-
-            if (!customerName) {
-                alert("Please insert customer and make payment");
-                return;
-            }
-
+        function generatePDF() {
             const tableRows = document.getElementById('orderTable').rows;
             let items = [];
             let grandTotal = 0;
+            const date = new Date().toLocaleDateString();
+            const time = new Date().toLocaleTimeString();
+            const customerName = document.getElementById('customerNameInput').value;
+            const phoneNumber = document.getElementById('phoneNumberInput').value;
 
             for (let i = 0; i < tableRows.length; i++) {
                 const row = tableRows[i];
                 const item = {
                     product_id: row.cells[0].textContent,
                     serial_number: row.cells[1].textContent,
-                    quantity: row.cells[2].textContent,
-                    selling_price: row.cells[3].textContent,
-                    discount: row.cells[4].textContent,
-                    total_price: row.cells[5].textContent
+                    quantity: parseInt(row.cells[2].textContent),
+                    selling_price: parseFloat(row.cells[3].textContent),
+                    discount: parseFloat(row.cells[4].textContent),
+                    total_price: parseFloat(row.cells[5].textContent)
                 };
-                grandTotal += parseFloat(row.cells[5].textContent);
                 items.push(item);
+                grandTotal += item.total_price;
             }
 
-            if (items.length > 0) {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'process_payment.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onload = function() {
-                    if (this.status === 200) {
-                        alert('Payment processed successfully!');
-                        // Clear the order table after successful payment
-                        document.getElementById('orderTable').innerHTML = '';
-                        updateNetTotal(); // Reset net total display
-                        generatePDF(items, grandTotal);
-                    } else {
-                        alert('Error processing payment.');
-                    }
-                };
-                xhr.send(JSON.stringify(items));
-            } else {
-                alert('No items to process.');
-            }
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'generate_pdf.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.responseType = 'blob';
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    const url = window.URL.createObjectURL(new Blob([this.response]));
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'order_summary.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    alert('Error generating PDF.');
+                }
+            };
+            xhr.send(JSON.stringify({ items, grandTotal, date, time, customerName, phoneNumber }));
         }
 
-        function generatePDF(items, grandTotal) {
-            // Placeholder for PDF generation code
-            console.log('Generating PDF with items:', items, 'and grand total:', grandTotal);
+        function proceedPayment() {
+            // Handle payment processing (this is a placeholder function)
+            alert('Proceeding to payment...');
         }
     </script>
 </body>

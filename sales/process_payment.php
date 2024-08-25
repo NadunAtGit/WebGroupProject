@@ -23,4 +23,3 @@ foreach ($data as $item) {
 
 echo "Payment processed successfully!";
 ?>
-
