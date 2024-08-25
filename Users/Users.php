@@ -224,6 +224,4 @@ include("../Database/db.php");
     </script>
 
 </body>
-</html>
-
 
