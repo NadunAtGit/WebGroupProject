@@ -7,7 +7,9 @@ session_start(); // Ensure the session is started
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech-Tool SPA</title>
+    <title>Tech-Tool</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../Users/Users.css">
@@ -74,16 +76,13 @@ session_start(); // Ensure the session is started
             </li>
             <li>
                 <a href="#" onclick="showContent('reports'); return false;" >
-
                     <i class="bx bx-bar-chart-alt-2"></i>
-
-                    
-                    <span class="nav-item">Reports</span>
+                    <span class="nav-item">Sales</span>
                 </a>
             </li>
             <?php if ($_SESSION['user_role'] !== 'user') { ?>
                 <li>
-                    <a href="#" onclick="showContent('customers'); return false;" >
+                    <a href="#" onclick="showContent('users'); return false;" >
                         <i class="bx bx-user"></i>
                         <span class="nav-item">Users</span>
                     </a>
@@ -95,6 +94,13 @@ session_start(); // Ensure the session is started
                     <span class="nav-item">Suppliers</span>
                 </a>
             </li>
+
+            <li>
+                <a href="#" onclick="showContent('customers'); return false;" >
+                    <i class="bx bx-user"></i>
+                    <span class="nav-item">Customers</span>
+                </a>
+            </li>
             <li>
                 <a href="../Login/Logout.php" >
                     <i class="bx bx-log-out"></i>
@@ -104,7 +110,7 @@ session_start(); // Ensure the session is started
         </ul>
     </div>
     <div class="main-content">
-        <iframe id="main-content-iframe" src="" frameborder="0"></iframe>
+        <iframe id="main-content-iframe" src="../Dashboard/Dashboard.php" frameborder="0" ></iframe>
     </div>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -130,15 +136,18 @@ session_start(); // Ensure the session is started
             iframe.src = '../Inventory/inventory.php'; // Update with the actual path
         } else if (section === 'reports') {
             iframe.src = '../Sales/sales.php'; // Update with the actual path
-        } else if (section === 'customers') {
+        } else if (section === 'users') {
             iframe.src = '../Users/Users.php'; // Update with the actual path
         } else if (section === 'suppliers') {
             iframe.src = '../Suppliers/Suppliers.php'; // Update with the actual path
         }
+        else if (section === 'customers') {
+            iframe.src = '../Customer/customer.php'; // Update with the actual path
+        }
         else if (section === 'purchases') {
             iframe.src = '../Purchases/Purchases.php'; // Update with the actual path
         } else {
-            iframe.src = ''; // Clear the iframe if needed
+             // Clear the iframe if needed
         }
     }
     </script>
