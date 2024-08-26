@@ -1,2 +1,0 @@
-2024-08-09 16:24:41 - Error: Access denied for user 'root'@'localhost' (using password: NO)
-2024-08-26 13:56:50 - Error: Connection failed: No connection could be made because the target machine actively refused it
