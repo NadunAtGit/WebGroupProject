@@ -75,9 +75,15 @@ if (!isset($_SESSION["user_id"])) {
                 </a>
             </li>
             <li>
+
+                <a href="#" onclick="showContent('reports'); return false;" >
+
                 <a href="#" onclick="showContent('reports'); return false;">
+
                     <i class="bx bx-bar-chart-alt-2"></i>
-                    <span class="nav-item">Sales</span>
+
+                    
+                    <span class="nav-item">Reports</span>
                 </a>
             </li>
             <?php if ($_SESSION['user_role'] !== 'user') { ?>

@@ -73,6 +73,7 @@ include("../Database/db.php");
                         </tr>
 
                         <!-- Update Modal for each product -->
+                        <!-- Update Modal for each product -->
                         <div class="modal fade" id="updateModal-<?php echo $row['Product_ID']; ?>" tabindex="-1" aria-labelledby="updateModalLabel-<?php echo $row['Product_ID']; ?>" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -87,10 +88,10 @@ include("../Database/db.php");
                                                 <label for="update_product_name-<?php echo $row['Product_ID']; ?>" class="form-label">Product Name</label>
                                                 <input type="text" class="form-control" id="update_product_name-<?php echo $row['Product_ID']; ?>" name="product_name" value="<?php echo htmlspecialchars($row["product_name"]); ?>" required>
                                             </div>
-                                            <!-- <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label for="update_quantity-<?php echo $row['Product_ID']; ?>" class="form-label">Quantity</label>
                                                 <input type="number" class="form-control" id="update_quantity-<?php echo $row['Product_ID']; ?>" name="quantity" value="<?php echo htmlspecialchars($row["quantity"]); ?>" required>
-                                            </div> -->
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="update_category-<?php echo $row['Product_ID']; ?>" class="form-label">Category</label>
                                                 <select class="form-select" id="update_category-<?php echo $row['Product_ID']; ?>" name="category" required>
@@ -117,6 +118,42 @@ include("../Database/db.php");
             </tbody>
         </table>
     </div>
+
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="../Products/Insert_Product.php">
+                    <div class="mb-3">
+                        <label for="product_name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product_name" name="product_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Phones">Phones</option>
+                            <option value="Parts">Ram</option>
+                            <option value="Parts">VGA</option>
+                            <option value="Parts">HardDisk</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" name="add_product">Add</button>
+                    </div>
+                </form>
 
     <!-- Add Product Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -151,6 +188,7 @@ include("../Database/db.php");
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

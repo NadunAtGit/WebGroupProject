@@ -32,6 +32,13 @@ if (!$result) {
     }
 }
 
+
+// Close the first PHP block here
+?>
+
+<?php
+session_start(); // Ensure the session is started
+
 // Query to get today's sales
 $today = date('Y-m-d'); // Assuming date format is YYYY-MM-DD
 $salesQuery = "SELECT SUM(Total) as total_sales, COUNT(*) as customer_count FROM sales WHERE DATE(Date) = ?";
@@ -89,6 +96,7 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
         'sales' => $row['daily_sales']
     ];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +115,17 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
 </head>
 <body>
     <div class="dashboard">
+        <div class="topline">
+            <h3><?php echo htmlspecialchars($_SESSION['user_role']); ?> /Dashboard</h3>
+        </div>
         <div class="top-div">
+            <div class="data-div">
+                <div class="inner-div">
+                    <i class="i-div bx bx-dollar-circle"></i>
+                    <h1>$10000</h1>
+                </div>
+                <p>Today Sales</p>
+            </div>
             <div class="data-div">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
@@ -115,7 +133,7 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
                 </div>
                 <p>Today Revenue</p>
             </div>
-            <div class="data-div">
+            <div class="data-div3">
                 <div class="inner-div">
                     <i class="i-div bx bx-user"></i>
                     <h1><?php echo htmlspecialchars($todayCustomers); ?></h1>
@@ -133,21 +151,21 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
         <hr class="my-4">
 
         <div class="top-div">
-            <div class="data-div">
+            <div class="data-div4">
                 <div class="inner-div">
                     <i class="i-div bx bx-mobile"></i>
                     <h1><?php echo htmlspecialchars($mobilePhones); ?></h1>
                 </div>
                 <p>Mobile Phones</p>
             </div>
-            <div class="data-div">
+            <div class="data-div5">
                 <div class="inner-div">
                     <i class="i-div bx bx-laptop"></i>
                     <h1><?php echo htmlspecialchars($laptops); ?></h1>
                 </div>
                 <p>Laptops</p>
             </div>
-            <div class="data-div">
+            <div class="data-div6">
                 <div class="inner-div">
                     <i class="i-div bx bx-wrench"></i>
                     <h1><?php echo htmlspecialchars($parts); ?></h1>
@@ -210,4 +228,8 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
         });
     </script>
 </body>
+
+</html>
+
+
 </html>
