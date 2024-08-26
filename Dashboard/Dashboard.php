@@ -119,17 +119,17 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
             <h3><?php echo htmlspecialchars($_SESSION['user_role']); ?> /Dashboard</h3>
         </div>
         <div class="top-div">
-            <div class="data-div">
-                <div class="inner-div">
-                    <i class="i-div bx bx-dollar-circle"></i>
-                    <h1>$10000</h1>
-                </div>
-                <p>Today Sales</p>
-            </div>
-            <div class="data-div">
+            <div class="data-div1">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
                     <h1><?php echo htmlspecialchars('$' . number_format($todaySales, 2)); ?></h1>
+                </div>
+                <p>Today Sales</p>
+            </div>
+            <div class="data-div2">
+                <div class="inner-div">
+                    <i class="i-div bx bx-dollar-circle"></i>
+                    <h1><?php echo htmlspecialchars('$' . number_format($todayCustomers, 2)); ?></h1>
                 </div>
                 <p>Today Revenue</p>
             </div>
@@ -140,13 +140,7 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
                 </div>
                 <p>Today Customers</p>
             </div>
-            <div class="data-div">
-                <div class="inner-div">
-                    <i class="i-div bx bx-box"></i>
-                    <h1><?php echo htmlspecialchars($totalItemsSold); ?></h1>
-                </div>
-                <p>Items Sold Today</p>
-            </div>
+            
         </div>
         <hr class="my-4">
 

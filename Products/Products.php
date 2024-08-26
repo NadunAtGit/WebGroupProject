@@ -144,9 +144,8 @@ include("../Database/db.php");
                             <option value="" disabled selected>Select category</option>
                             <option value="Laptop">Laptop</option>
                             <option value="Phones">Phones</option>
-                            <option value="Parts">Ram</option>
-                            <option value="Parts">VGA</option>
-                            <option value="Parts">HardDisk</option>
+                            <option value="Parts">Parts</option>
+                            
                         </select>
                     </div>
                     <div class="modal-footer">
