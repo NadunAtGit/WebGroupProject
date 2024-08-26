@@ -39,7 +39,14 @@ if(isset($_POST["add_users"])){
 
     // Generate the customized User_ID
     $sql = "SELECT User_ID FROM users ORDER BY User_ID DESC LIMIT 1";
-    $result = $connection->query($sql);
+    $stmt = $connection->stmt_init();
+    
+    if(!$stmt->prepare($sql)){
+        die("SQL error: " . $connection->error);
+    }
+    
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -81,16 +88,26 @@ if(isset($_POST["add_users"])){
         $image_path = null;
     }
 
-    // Prepare and execute the SQL statement
+//<---------------------------------------SQL Injection Prevent ----------------------------------------->
+
+    // Prepare and execute the SQL statement        // SQL Query Template: In the provided code, the SQL query is defined as a template with placeholders (?) for the user input. For example:
     $sql = "INSERT INTO users (User_ID, user_name, first_name, email, password_hash, role, image_path) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    //Preparation of the Statement: The prepare() function is called on the connection object to create a prepared statement
     $stmt = $connection->stmt_init();
     
     if(!$stmt->prepare($sql)){
         die("SQL error: " . $connection->error);
     }
 
+
+    //Binding Parameters: The bind_param() function binds the actual user input to the placeholders in the query
     $stmt->bind_param("sssssss", $new_id, $_POST["user_name"], $_POST["first_name"], $_POST["email"], $password_hash, $role, $image_path);
     
+
+
+
+    //Execution of the Query: Finally, the execute() function runs the prepared statement , The SQL query is executed with the safely bound data. Since the data has been securely handled, there’s no risk of SQL injection
     if($stmt->execute()){
         // Redirect to the users list page or another appropriate page
         header("Location: ../Users/Users.php");
@@ -99,4 +116,5 @@ if(isset($_POST["add_users"])){
         die("Execution error: " . $stmt->error);
     }
 }
+
 ?>

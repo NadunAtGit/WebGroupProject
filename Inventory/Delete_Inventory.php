@@ -1,39 +1,24 @@
 <?php
-// Include database connection
-include("../Database/db.php");
+include("../Database/db.php"); // Ensure this file includes the correct database connection
 
-// Check if the 'stock_id' and 'product_id' parameters are set
+// Check if 'stock_id' and 'product_id' parameters are set in the URL
 if (isset($_GET['stock_id']) && isset($_GET['product_id'])) {
-    $stock_id = htmlspecialchars($_GET['stock_id']);
-    $product_id = htmlspecialchars($_GET['product_id']);
-
-    // Fetch the quantity of the inventory item being deleted
-    $fetchQuantityQuery = "SELECT quantity FROM purchases WHERE Stock_ID = ? AND Product_ID = ?";
-    if ($stmt = $connection->prepare($fetchQuantityQuery)) {
-        $stmt->bind_param("ss", $stock_id, $product_id);
-        $stmt->execute();
-        $stmt->bind_result($quantity);
-        $stmt->fetch();
-        $stmt->close();
-
-        // Update the products table to decrease the quantity
-        $updateQuery = "UPDATE products SET quantity = quantity - ? WHERE Product_ID = ?";
-        if ($stmt = $connection->prepare($updateQuery)) {
-            $stmt->bind_param("is", $quantity, $product_id);
-            if ($stmt->execute()) {
-                // Now that the quantity is adjusted, you may proceed with any additional actions if needed
-                header("Location: ../Inventory/Inventory.php"); // Redirect to inventory list
-                exit();
-            } else {
-                die("Update failed: " . $stmt->error);
-            }
-        } else {
-            die("SQL prepare failed: " . $connection->error);
-        }
+    $stockId = mysqli_real_escape_string($connection, $_GET['stock_id']);
+    $productId = mysqli_real_escape_string($connection, $_GET['product_id']);
+    
+    // Delete the specific inventory item from the database
+    $query = "DELETE FROM inventory WHERE stock_id = '$stockId' AND product_id = '$productId'";
+    
+    if (mysqli_query($connection, $query)) {
+        // Redirect to the inventory page with a success message
+        header("Location: inventory.php?message=Inventory item deleted successfully");
+        exit();
     } else {
-        die("SQL prepare failed: " . $connection->error);
+        // Handle error
+        die("Error deleting inventory item: " . mysqli_error($connection));
     }
 } else {
-    die("Invalid request");
+    // Handle the case where 'stock_id' or 'product_id' parameters are missing
+    die("Stock ID or Product ID not specified.");
 }
 ?>

@@ -17,6 +17,16 @@ include("../Database/db.php");
             <h1>All Products</h1>
         </div>
 
+        <div class="row mb-3">
+            <!-- Search bar -->
+            <div class="col-12 mb-2">
+                <form class="d-flex" role="search" id="searchForm" method="GET" action="">
+                    <input class="form-control" type="search" placeholder="Search by Product Name" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success ms-2" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
         <table class="table table-hover table-bordered table-striped" id="xx">
             <thead>
                 <tr>
@@ -29,7 +39,11 @@ include("../Database/db.php");
             </thead>
             <tbody>
                 <?php 
-                $query = "SELECT * FROM products";
+                // Initialize search query
+                $search = isset($_GET['search']) ? mysqli_real_escape_string($connection, $_GET['search']) : '';
+
+                // Modify the query based on search input
+                $query = "SELECT * FROM products WHERE product_name LIKE '%$search%'";
                 $result = mysqli_query($connection, $query);
                 if (!$result) {
                     die("Query failed: " . mysqli_error($connection));
@@ -108,6 +122,7 @@ include("../Database/db.php");
         </table>
     </div>
 
+
 <!-- Add Product Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -142,11 +157,44 @@ include("../Database/db.php");
                         <button type="submit" class="btn btn-success" name="add_product">Add</button>
                     </div>
                 </form>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../Products/Insert_Product.php">
+                        <div class="mb-3">
+                            <label for="product_name" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="product_name" name="product_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="" disabled selected>Select category</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Phones">Phones</option>
+                                <option value="Parts">Parts</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" name="add_product">Add</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-
 
     <!-- Include Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
