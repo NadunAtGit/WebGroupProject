@@ -2,7 +2,7 @@
 
 Go to the `Database` folder, and you will find a SQL file named `inventory2.sql`. Import this file into phpMyAdmin before running the project.
 
-----Tech-Tool Inventory Management System----
+## ----Tech-Tool Inventory Management System----
 
 Tech-Tool is a web-based Inventory Management System built with PHP and MySQL. 
 It helps users manage inventory items efficiently with features like item addition, deletion, updates, reporting, and Point of Sales (POS).
