@@ -9,7 +9,7 @@ if (isset($_POST['product_id'])) {
 
     $query = "UPDATE products SET 
               product_name = '$product_name',
-            --   quantity = '$quantity',
+            
               category = '$category'
               WHERE Product_ID = '$product_id'";
 

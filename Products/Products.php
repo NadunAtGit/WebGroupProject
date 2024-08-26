@@ -88,10 +88,7 @@ include("../Database/db.php");
                                                 <label for="update_product_name-<?php echo $row['Product_ID']; ?>" class="form-label">Product Name</label>
                                                 <input type="text" class="form-control" id="update_product_name-<?php echo $row['Product_ID']; ?>" name="product_name" value="<?php echo htmlspecialchars($row["product_name"]); ?>" required>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="update_quantity-<?php echo $row['Product_ID']; ?>" class="form-label">Quantity</label>
-                                                <input type="number" class="form-control" id="update_quantity-<?php echo $row['Product_ID']; ?>" name="quantity" value="<?php echo htmlspecialchars($row["quantity"]); ?>" required>
-                                            </div>
+                                            
                                             <div class="mb-3">
                                                 <label for="update_category-<?php echo $row['Product_ID']; ?>" class="form-label">Category</label>
                                                 <select class="form-select" id="update_category-<?php echo $row['Product_ID']; ?>" name="category" required>
@@ -134,10 +131,7 @@ include("../Database/db.php");
                         <label for="product_name" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="product_name" name="product_name" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" required>
-                    </div>
+                   
                     <div class="mb-3">
                         <label for="category" class="form-label">Category</label>
                         <select class="form-select" id="category" name="category" required>
