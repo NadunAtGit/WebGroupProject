@@ -35,13 +35,13 @@ foreach ($data as $item) {
     $total += $total_price; // Calculate the total bill
 
     // Update quantity in the products table
-    $productQuery = "UPDATE products SET quantity = quantity - ? WHERE Product_ID = ?";
+    $productQuery = "UPDATE products SET quantity = GREATEST(0, quantity - ?) WHERE Product_ID = ?";
     $productStmt = mysqli_prepare($connection, $productQuery);
     mysqli_stmt_bind_param($productStmt, "is", $quantity, $product_id);
     mysqli_stmt_execute($productStmt);
 
     // Update quantity in the inventory table
-    $inventoryQuery = "UPDATE inventory SET quantity = quantity - ? WHERE product_id = ? AND stock_id = ?";
+    $inventoryQuery = "UPDATE inventory SET quantity = GREATEST(0, quantity - ?) WHERE product_id = ? AND stock_id = ?";
     $inventoryStmt = mysqli_prepare($connection, $inventoryQuery);
 
     if ($inventoryStmt) {

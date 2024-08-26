@@ -4,12 +4,12 @@ include("../Database/db.php");
 if (isset($_POST['product_id'])) {
     $product_id = mysqli_real_escape_string($connection, $_POST['product_id']);
     $product_name = mysqli_real_escape_string($connection, $_POST['product_name']);
-    $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
+    // $quantity = mysqli_real_escape_string($connection, $_POST['quantity']);
     $category = mysqli_real_escape_string($connection, $_POST['category']);
 
     $query = "UPDATE products SET 
               product_name = '$product_name',
-              quantity = '$quantity',
+            --   quantity = '$quantity',
               category = '$category'
               WHERE Product_ID = '$product_id'";
 
