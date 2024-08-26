@@ -54,3 +54,21 @@ CREATE TABLE orders (
     price_per_unit DECIMAL(10, 2) NOT NULL,
     discounts DECIMAL(10, 2)
 );
+
+CREATE TABLE sales (
+    Bill_ID VARCHAR(50) PRIMARY KEY,
+    Customer_ID VARCHAR(50) NOT NULL,
+    Total DECIMAL(10, 2) NOT NULL,
+    items TEXT NOT NULL,
+    date DATE NOT NULL
+);
+
+
+CREATE TABLE inventory (
+    stock_id VARCHAR(50),
+    product_id VARCHAR(50),
+    quantity INT NOT NULL,
+    selling_price DECIMAL(10, 2) NOT NULL,
+    category VARCHAR(50),
+    PRIMARY KEY (stock_id, product_id)
+);
