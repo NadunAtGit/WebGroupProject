@@ -122,14 +122,16 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
             <div class="data-div1">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
-                    <h1><?php echo htmlspecialchars('$' . number_format($todaySales, 2)); ?></h1>
+                    <h1><?php echo htmlspecialchars($totalItemsSold); ?></h1>
+
                 </div>
-                <p>Today Sales</p>
+                <p>Item Solds Today</p>
             </div>
             <div class="data-div2">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
-                    <h1><?php echo htmlspecialchars('$' . number_format($todayCustomers, 2)); ?></h1>
+                    <h1><?php echo htmlspecialchars('$' . number_format($todaySales, 2)); ?></h1>
+
                 </div>
                 <p>Today Revenue</p>
             </div>
