@@ -36,7 +36,7 @@ if (!$result) {
 
 <?php
 session_start(); // Ensure the session is started
-=======
+
 // Query to get today's sales
 $today = date('Y-m-d'); // Assuming date format is YYYY-MM-DD
 $salesQuery = "SELECT SUM(Total) as total_sales FROM sales WHERE DATE(Date) = ?";
@@ -75,7 +75,7 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
         'sales' => $row['daily_sales']
     ];
 }
->>>>>>> 6c84ca5971d309336f969f63315f9cd66fdb8a5d
+
 ?>
 
 <!DOCTYPE html>
