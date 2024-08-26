@@ -6,6 +6,8 @@ $mobilePhones = 0;
 $laptops = 0;
 $parts = 0;
 $todaySales = 0; // Variable for today's sales
+$todayCustomers = 0; // Variable for today's customers
+$totalItemsSold = 0; // Variable for total items sold today
 
 // Query to get the sum of quantities for each category
 $query = "SELECT category, SUM(quantity) as total_quantity FROM products GROUP BY category";
@@ -32,7 +34,7 @@ if (!$result) {
 
 // Query to get today's sales
 $today = date('Y-m-d'); // Assuming date format is YYYY-MM-DD
-$salesQuery = "SELECT SUM(Total) as total_sales FROM sales WHERE DATE(Date) = ?";
+$salesQuery = "SELECT SUM(Total) as total_sales, COUNT(*) as customer_count FROM sales WHERE DATE(Date) = ?";
 $salesStmt = mysqli_prepare($connection, $salesQuery);
 
 if (!$salesStmt) {
@@ -41,11 +43,30 @@ if (!$salesStmt) {
 
 mysqli_stmt_bind_param($salesStmt, "s", $today);
 mysqli_stmt_execute($salesStmt);
-mysqli_stmt_bind_result($salesStmt, $todaySales);
+mysqli_stmt_bind_result($salesStmt, $todaySales, $todayCustomers);
 mysqli_stmt_fetch($salesStmt);
 mysqli_stmt_close($salesStmt);
 
+// Query to get total items sold today
+$itemsQuery = "SELECT items FROM sales WHERE DATE(Date) = ?";
+$itemsStmt = mysqli_prepare($connection, $itemsQuery);
 
+if (!$itemsStmt) {
+    die("Failed to prepare statement: " . mysqli_error($connection));
+}
+
+mysqli_stmt_bind_param($itemsStmt, "s", $today);
+mysqli_stmt_execute($itemsStmt);
+mysqli_stmt_bind_result($itemsStmt, $itemsSerialized);
+
+while (mysqli_stmt_fetch($itemsStmt)) {
+    $items = json_decode($itemsSerialized, true);
+    foreach ($items as $item) {
+        $totalItemsSold += $item['quantity'];
+    }
+}
+
+mysqli_stmt_close($itemsStmt);
 
 // Query to get sales for the last 4 days
 $sales4DaysQuery = "
@@ -90,13 +111,6 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
             <div class="data-div">
                 <div class="inner-div">
                     <i class="i-div bx bx-dollar-circle"></i>
-                    <h1>$10000</h1>
-                </div>
-                <p>Today Sales</p>
-            </div>
-            <div class="data-div">
-                <div class="inner-div">
-                    <i class="i-div bx bx-dollar-circle"></i>
                     <h1><?php echo htmlspecialchars('$' . number_format($todaySales, 2)); ?></h1>
                 </div>
                 <p>Today Revenue</p>
@@ -104,11 +118,19 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
             <div class="data-div">
                 <div class="inner-div">
                     <i class="i-div bx bx-user"></i>
-                    <h1>$100000</h1>
+                    <h1><?php echo htmlspecialchars($todayCustomers); ?></h1>
                 </div>
                 <p>Today Customers</p>
             </div>
+            <div class="data-div">
+                <div class="inner-div">
+                    <i class="i-div bx bx-box"></i>
+                    <h1><?php echo htmlspecialchars($totalItemsSold); ?></h1>
+                </div>
+                <p>Items Sold Today</p>
+            </div>
         </div>
+        <hr class="my-4">
 
         <div class="top-div">
             <div class="data-div">
@@ -133,7 +155,7 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
                 <p>Parts</p>
             </div>
         </div>
-
+        <hr class="my-4">
         <div class="bottom-div">
             <!-- Additional content here -->
             <canvas id="salesChart" style="width: 300px; height: 150px;"></canvas>
@@ -142,50 +164,50 @@ while ($row = mysqli_fetch_assoc($sales4DaysResult)) {
 
     <script>
         const salesData = <?php echo json_encode($salesData); ?>;
-    const labels = salesData.map(data => data.date);
-    const data = salesData.map(data => data.sales);
+        const labels = salesData.map(data => data.date);
+        const data = salesData.map(data => data.sales);
 
-    // Define colors for each column
-    const colors = [
-        'rgba(75, 192, 192, 0.2)', // Color for the first column
-        'rgba(255, 99, 132, 0.2)', // Color for the second column
-        'rgba(255, 159, 64, 0.2)', // Color for the third column
-        'rgba(153, 102, 255, 0.2)'  // Color for the fourth column
-    ];
+        // Define colors for each column
+        const colors = [
+            'rgba(75, 192, 192, 0.2)', // Color for the first column
+            'rgba(255, 99, 132, 0.2)', // Color for the second column
+            'rgba(255, 159, 64, 0.2)', // Color for the third column
+            'rgba(153, 102, 255, 0.2)'  // Color for the fourth column
+        ];
 
-    // Create the chart
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    const salesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Sales for the Last 4 Days',
-                data: data,
-                backgroundColor: colors,
-                borderColor: colors.map(color => color.replace('0.2', '1')), // Use the same colors but with full opacity for borders
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Date'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Sales'
+        // Create the chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales for the Last 4 Days',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: colors.map(color => color.replace('0.2', '1')), // Use the same colors but with full opacity for borders
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sales'
+                        }
                     }
                 }
             }
-        }
-    });
+        });
     </script>
 </body>
 </html>
