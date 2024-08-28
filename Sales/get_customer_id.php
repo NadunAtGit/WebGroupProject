@@ -14,4 +14,5 @@ if (isset($_POST['customer_name'])) {
     echo $customer_id ? $customer_id : "Customer not found";
     mysqli_stmt_close($stmt);
 }
-?>
+
+?>  

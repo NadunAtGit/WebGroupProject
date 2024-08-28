@@ -26,55 +26,37 @@ $items = [];
 foreach ($data as $item) {
     $product_id = mysqli_real_escape_string($connection, $item['product_id']);
     $stock_id =  mysqli_real_escape_string($connection, $item['stock_id']);
-    $requested_quantity = $item['quantity'];
+    $quantity = $item['quantity'];
     $selling_price = $item['selling_price'];
     $discount = $item['discount'];
     $total_price = $item['total_price'];
 
-    // Check available quantity in the products table
-    $productQuery = "SELECT quantity FROM products WHERE Product_ID = ?";
-    $productStmt = mysqli_prepare($connection, $productQuery);
-    mysqli_stmt_bind_param($productStmt, "s", $product_id);
-    mysqli_stmt_execute($productStmt);
-    mysqli_stmt_bind_result($productStmt, $available_quantity_product);
-    mysqli_stmt_fetch($productStmt);
-    mysqli_stmt_close($productStmt);
-
-    // Check available quantity in the inventory table for the specific stock_id
-    $inventoryQuery = "SELECT quantity FROM inventory WHERE product_id = ? AND stock_id = ?";
-    $inventoryStmt = mysqli_prepare($connection, $inventoryQuery);
-    mysqli_stmt_bind_param($inventoryStmt, "ss", $product_id, $stock_id);
-    mysqli_stmt_execute($inventoryStmt);
-    mysqli_stmt_bind_result($inventoryStmt, $available_quantity_inventory);
-    mysqli_stmt_fetch($inventoryStmt);
-    mysqli_stmt_close($inventoryStmt);
-
-    // Determine the maximum quantity that can be sold (whichever is lower)
-    $available_quantity = min($available_quantity_product, $available_quantity_inventory);
-    $quantity_to_sell = min($requested_quantity, $available_quantity);
+    $items[] = $item; // Collect item details
+    $total += $total_price; // Calculate the total bill
 
     // Update quantity in the products table
-    $productUpdateQuery = "UPDATE products SET quantity = GREATEST(0, quantity - ?) WHERE Product_ID = ?";
-    $productUpdateStmt = mysqli_prepare($connection, $productUpdateQuery);
-    mysqli_stmt_bind_param($productUpdateStmt, "is", $quantity_to_sell, $product_id);
-    mysqli_stmt_execute($productUpdateStmt);
-    mysqli_stmt_close($productUpdateStmt);
+    $productQuery = "UPDATE products SET quantity = GREATEST(0, quantity - ?) WHERE Product_ID = ?";
+    $productStmt = mysqli_prepare($connection, $productQuery);
+    mysqli_stmt_bind_param($productStmt, "is", $quantity, $product_id);
+    mysqli_stmt_execute($productStmt);
 
     // Update quantity in the inventory table
-    $inventoryUpdateQuery = "UPDATE inventory SET quantity = GREATEST(0, quantity - ?) WHERE product_id = ? AND stock_id = ?";
-    $inventoryUpdateStmt = mysqli_prepare($connection, $inventoryUpdateQuery);
-    mysqli_stmt_bind_param($inventoryUpdateStmt, "iss", $quantity_to_sell, $product_id, $stock_id);
-    mysqli_stmt_execute($inventoryUpdateStmt);
-    mysqli_stmt_close($inventoryUpdateStmt);
+    $inventoryQuery = "UPDATE inventory SET quantity = GREATEST(0, quantity - ?) WHERE product_id = ? AND stock_id = ?";
+    $inventoryStmt = mysqli_prepare($connection, $inventoryQuery);
 
-    // Calculate the total price for the item with the adjusted quantity
-    $item_total_price = $quantity_to_sell * $selling_price * (1 - $discount / 100);
+    if ($inventoryStmt) {
+        mysqli_stmt_bind_param($inventoryStmt, "iss", $quantity, $product_id, $stock_id);
+        mysqli_stmt_execute($inventoryStmt);
 
-    // Update the items and total amount
-    $item['quantity'] = $quantity_to_sell;
-    $item['total_price'] = $item_total_price;
-    $items[] = $item;
-    $total += $item_total_price;
+        // Check if the update was successful
+        if (mysqli_stmt_affected_rows($inventoryStmt) === 0) {
+            // No rows were affected, likely due to incorrect product_id or stock_id
+            echo "No inventory record was updated for Product ID: $product_id and Stock ID: $stock_id";
+        }
+    } else {
+        // Log the error if the query failed
+        echo "Failed to prepare inventory update query: " . mysqli_error($connection);
+    }
 }
 
 // Serialize items array to store as JSON text
